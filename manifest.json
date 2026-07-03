@@ -1,12 +1,14 @@
 {
   "name": "Jing & Bling",
   "short_name": "Jing & Bling",
-  "description": "Student finance tracker \u2014 tuition, supplements, herbs, and hustle",
-  "start_url": "/jing-and-bling/index.html",
+  "description": "Student Finance \u00b7 VUIM 2026\u20132030",
+  "start_url": "/jing-and-bling/",
   "scope": "/jing-and-bling/",
   "display": "standalone",
+  "orientation": "portrait",
   "background_color": "#09090f",
   "theme_color": "#d97706",
+  "lang": "en",
   "icons": [
     {
       "src": "icon-192.png",
