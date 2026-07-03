@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="dark">
 <head>
-<base href="/jing-and-bling/">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes">
@@ -294,7 +293,7 @@ function renderAll(){
 }
 
 initLog();renderOverview();renderHealth();loadTuition();
-if('serviceWorker' in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('/jing-and-bling/sw.js').catch(e=>console.log(e)));
+if('serviceWorker' in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('/sw.js', {scope: '/jing-and-bling/'}).catch(e=>console.log(e)));
 </script>
 </body>
 </html>
