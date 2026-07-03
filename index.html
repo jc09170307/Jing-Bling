@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Jing & Bling">
+<meta name="theme-color" content="#d97706">
+<link rel="manifest" href="manifest.json"><link rel="apple-touch-icon" href="icon-512.png">
+<title>Jing & Bling 💸</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+button,input,textarea,select{font-family:inherit;-webkit-appearance:none;appearance:none}
+:root{--g:#d97706;--g2:#fbbf24;--v:#7c3aed;--v2:#9f67f5;--t:#0d9488;--t2:#14b8a6;--r:#dc2626;--r2:#f87171;--bg:#09090f;--bg2:#0f0f1a;--bg3:#16162a;--bg4:#1c1c30;--tx:#fff8e7;--tx2:#d4b896;--tx3:#8a7055;--bd:rgba(217,119,6,.2);--bd2:rgba(217,119,6,.08);--card:#0f0f1a;--hh:58px;--nh:60px;}
+[data-theme="light"]{--bg:#fffbf0;--bg2:#fff;--bg3:#fef3c7;--bg4:#fde68a;--tx:#1c1208;--tx2:#6b4c0f;--tx3:#a17c3a;--bd:rgba(217,119,6,.25);--bd2:rgba(217,119,6,.1);--card:#fff;}
+html,body{background:var(--bg);color:var(--tx);font-family:'DM Sans',sans-serif;font-size:16px;min-height:100vh}
+body{padding-bottom:calc(var(--nh)+20px)}
+.hdr{height:var(--hh);padding:0 1rem;display:flex;align-items:center;justify-content:space-between;background:var(--bg);border-bottom:1px solid var(--bd2);position:sticky;top:0;z-index:200;backdrop-filter:blur(12px)}
+.nav-wrap{position:sticky;top:var(--hh);z-index:150;background:var(--bg);border-bottom:1px solid var(--bd2);display:flex;overflow-x:auto;scrollbar-width:none;padding:.45rem .75rem;gap:6px}
+.nav-wrap::-webkit-scrollbar{display:none}
+.nav-btn{flex-shrink:0;display:flex;flex-direction:row;align-items:center;gap:5px;background:var(--bg3);border:1px solid var(--bd);border-radius:100px;cursor:pointer;padding:6px 13px;color:var(--tx2);transition:all .2s;-webkit-tap-highlight-color:transparent;white-space:nowrap;font-size:13px;font-weight:600}
+.nav-btn.active{background:var(--g);border-color:var(--g);color:#fff}
+.sec{display:none;padding:1rem;animation:fi .2s ease}.sec.active{display:block}
+@keyframes fi{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+.slbl{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--g2);margin-bottom:.65rem;display:flex;align-items:center;gap:.4rem}
+.slbl::after{content:'';flex:1;height:1px;background:var(--bd)}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:.9rem 1rem;margin-bottom:.65rem}
+.btn{width:100%;padding:.75rem 1rem;border:none;border-radius:12px;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:600;cursor:pointer;transition:all .2s;-webkit-tap-highlight-color:transparent}
+.bg-btn{background:var(--g);color:#fff}.bg-btn:active{transform:scale(.98)}
+.sec-btn{background:var(--bg3);color:var(--tx2);border:1px solid var(--bd)}.sec-btn:active{background:var(--bg4)}
+.inp{width:100%;background:var(--bg3);border:1px solid var(--bd);border-radius:12px;padding:.7rem .9rem;color:var(--tx);font-size:15px;transition:border-color .2s;resize:none}
+.inp:focus{outline:none;border-color:var(--g2)}.inp::placeholder{color:var(--tx3)}
+.ilbl{font-size:12px;font-weight:600;color:var(--tx3);margin-bottom:.35rem;display:block}
+.toast{position:fixed;bottom:calc(var(--nh)+12px);left:50%;transform:translateX(-50%) translateY(20px);background:var(--g);color:#fff;padding:.5rem 1.1rem;border-radius:100px;font-size:13px;font-weight:600;opacity:0;transition:all .3s;pointer-events:none;white-space:nowrap;z-index:999}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.big-num{font-family:'DM Serif Display',serif;font-size:42px;color:var(--g2);line-height:1}
+.tx-row{display:flex;align-items:flex-start;gap:.75rem;padding:.75rem 0;border-bottom:1px solid var(--bd2)}
+.tx-row:last-child{border-bottom:none}
+.tx-ico{width:38px;height:38px;border-radius:10px;background:var(--bg3);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.tx-ico.income{background:rgba(13,148,136,.15)}
+.tx-ico.expense{background:rgba(220,38,38,.12)}
+.cat-chip{display:inline-block;padding:3px 10px;border-radius:100px;font-size:11px;font-weight:600;background:var(--bg3);color:var(--tx3);border:1px solid var(--bd);cursor:pointer;-webkit-tap-highlight-color:transparent;transition:all .2s}
+.cat-chip.sel{background:rgba(217,119,6,.2);color:var(--g2);border-color:var(--g)}
+.prog-bar{height:8px;background:var(--bg3);border-radius:4px;overflow:hidden;margin:.35rem 0}
+.prog-fill{height:100%;border-radius:4px;background:var(--g);transition:width .6s ease}
+.prog-fill.over{background:var(--r2)}
+</style>
+</head>
+<body>
+<div class="toast" id="toast"></div>
+<header class="hdr">
+  <div>
+    <div style="font-family:'DM Serif Display',serif;font-size:18px;color:var(--tx)">Jing & Bling 💸</div>
+    <div style="font-size:9px;color:var(--g2);font-weight:600;letter-spacing:.08em;text-transform:uppercase;margin-top:1px">Student Finance · VUIM 2026–2030</div>
+  </div>
+  <button style="background:var(--bg3);border:1px solid var(--bd);border-radius:20px;padding:5px 12px;font-size:13px;cursor:pointer;color:var(--tx2)" id="theme-btn">☀️</button>
+</header>
+<nav class="nav-wrap">
+  <button class="nav-btn active" onclick="sw('overview',this)">📊 Overview</button>
+  <button class="nav-btn" onclick="sw('log',this)">➕ Log</button>
+  <button class="nav-btn" onclick="sw('budgets',this)">🎯 Budgets</button>
+  <button class="nav-btn" onclick="sw('tuition',this)">🎓 Tuition</button>
+  <button class="nav-btn" onclick="sw('health-spend',this)">⚗️ Health $</button>
+  <button class="nav-btn" onclick="sw('history',this)">📋 History</button>
+</nav>
+
+<!-- OVERVIEW -->
+<div class="sec active" id="sec-overview">
+  <div class="slbl">This month</div>
+  <div class="card" style="text-align:center;padding:1.5rem 1rem">
+    <div style="font-size:13px;color:var(--tx3);margin-bottom:.25rem">Net this month</div>
+    <div class="big-num" id="net-num">$0</div>
+    <div style="display:flex;justify-content:center;gap:2rem;margin-top:.75rem">
+      <div><div style="font-size:12px;color:var(--t2);font-weight:700">↑ Income</div><div style="font-size:18px;font-weight:700;color:var(--t2)" id="inc-num">$0</div></div>
+      <div><div style="font-size:12px;color:var(--r2);font-weight:700">↓ Expenses</div><div style="font-size:18px;font-weight:700;color:var(--r2)" id="exp-num">$0</div></div>
+    </div>
+  </div>
+  <div class="slbl">By category</div>
+  <div class="card" id="cat-breakdown"></div>
+  <div class="slbl">Recent</div>
+  <div class="card" id="recent-txs"><div style="text-align:center;color:var(--tx3);font-size:14px">No transactions yet.</div></div>
+</div>
+
+<!-- LOG -->
+<div class="sec" id="sec-log">
+  <div class="slbl">Add transaction</div>
+  <div class="card">
+    <div style="display:flex;gap:.5rem;margin-bottom:.75rem">
+      <button class="btn bg-btn" id="type-exp" onclick="setType('expense')" style="flex:1">− Expense</button>
+      <button class="btn sec-btn" id="type-inc" onclick="setType('income')" style="flex:1">+ Income</button>
+    </div>
+    <label class="ilbl">Amount ($)</label>
+    <input type="number" class="inp" id="tx-amount" placeholder="0.00" step=".01" min="0" style="margin-bottom:.65rem">
+    <label class="ilbl">Description</label>
+    <input type="text" class="inp" id="tx-desc" placeholder="e.g. TUDCA Plus, Mayway order, tutoring…" style="margin-bottom:.65rem">
+    <label class="ilbl">Category</label>
+    <div style="display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:.75rem" id="cat-chips"></div>
+    <label class="ilbl">Date</label>
+    <input type="date" class="inp" id="tx-date" style="margin-bottom:.75rem">
+    <button class="btn bg-btn" onclick="saveTx()">Save transaction</button>
+  </div>
+</div>
+
+<!-- BUDGETS -->
+<div class="sec" id="sec-budgets">
+  <div class="slbl">Monthly budgets</div>
+  <div id="budget-list"></div>
+  <div class="slbl" style="margin-top:.5rem">Set budget</div>
+  <div class="card">
+    <label class="ilbl">Category</label>
+    <select class="inp" id="bud-cat" style="margin-bottom:.65rem"><option value="">Select…</option></select>
+    <label class="ilbl">Monthly limit ($)</label>
+    <input type="number" class="inp" id="bud-amt" placeholder="e.g. 200" style="margin-bottom:.65rem">
+    <button class="btn bg-btn" onclick="saveBudget()">Set budget</button>
+  </div>
+</div>
+
+<!-- TUITION -->
+<div class="sec" id="sec-tuition">
+  <div class="slbl">VUIM program cost tracker</div>
+  <div class="card">
+    <div style="font-size:13px;color:var(--tx3);margin-bottom:.75rem;line-height:1.6">Track your tuition payments, financial aid, and remaining balance for the DAcHM/D.AcOM program (2026–2030).</div>
+    <label class="ilbl">Total program cost ($)</label>
+    <input type="number" class="inp" id="total-cost" placeholder="e.g. 60000" style="margin-bottom:.65rem">
+    <label class="ilbl">Total paid to date ($)</label>
+    <input type="number" class="inp" id="total-paid" placeholder="e.g. 5000" style="margin-bottom:.65rem">
+    <label class="ilbl">Financial aid / scholarships ($)</label>
+    <input type="number" class="inp" id="total-aid" placeholder="e.g. 10000" style="margin-bottom:.65rem">
+    <button class="btn bg-btn" onclick="saveTuition()">Update</button>
+  </div>
+  <div class="card" id="tuition-summary" style="display:none"></div>
+</div>
+
+<!-- HEALTH SPEND -->
+<div class="sec" id="sec-health-spend">
+  <div class="slbl">Health protocol costs</div>
+  <div class="card">
+    <div style="font-size:13px;color:var(--tx3);margin-bottom:.75rem;line-height:1.6">Your supplement stack is a significant monthly investment. Track it here.</div>
+    <div id="health-items"></div>
+    <div style="border-top:1px solid var(--bd);margin-top:.5rem;padding-top:.5rem">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <div style="font-size:14px;font-weight:700;color:var(--tx)">Monthly total</div>
+        <div style="font-family:'DM Serif Display',serif;font-size:22px;color:var(--g2)" id="health-total">$0</div>
+      </div>
+      <div style="font-size:12px;color:var(--tx3);margin-top:3px" id="health-annual"></div>
+    </div>
+  </div>
+</div>
+
+<!-- HISTORY -->
+<div class="sec" id="sec-history">
+  <div class="slbl">All transactions</div>
+  <div id="all-txs"><div class="card" style="text-align:center;color:var(--tx3);font-size:14px">No transactions yet.</div></div>
+  <button class="btn sec-btn" style="margin-top:.5rem" onclick="if(confirm('Delete all transactions?')){localStorage.removeItem('jb-txs');renderAll();toast('Cleared');}">Clear all</button>
+</div>
+
+<script>
+(function(){var s=localStorage.getItem('jb-theme');if(s)document.documentElement.setAttribute('data-theme',s);else document.documentElement.setAttribute('data-theme',window.matchMedia&&window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');})();
+document.getElementById('theme-btn').addEventListener('click',function(){var c=document.documentElement.getAttribute('data-theme'),n=c==='dark'?'light':'dark';document.documentElement.setAttribute('data-theme',n);localStorage.setItem('jb-theme',n);this.textContent=n==='dark'?'☀️':'🌙';});
+document.getElementById('theme-btn').textContent=document.documentElement.getAttribute('data-theme')==='dark'?'☀️':'🌙';
+
+function toast(m){var t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2200);}
+function sw(id,btn){document.querySelectorAll('.sec').forEach(s=>s.classList.remove('active'));document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));document.getElementById('sec-'+id).classList.add('active');if(btn)btn.classList.add('active');if(id==='overview')renderOverview();if(id==='budgets')renderBudgets();if(id==='history')renderAll();if(id==='health-spend')renderHealth();if(id==='tuition')loadTuition();}
+
+const CATS=['🎓 Tuition','⚗️ Supplements','🌿 Herbs/Mayway','🩺 Healthcare','📚 Books/Study','🏠 Housing','🍱 Food','💃 Dance','✨ Skincare','💻 Tech','🚗 Transport','💰 Income','🎁 Other'];
+var txType='expense', selCat='';
+
+function setType(t){txType=t;document.getElementById('type-exp').className='btn '+(t==='expense'?'bg-btn':'sec-btn');document.getElementById('type-inc').className='btn '+(t==='income'?'bg-btn':'sec-btn');}
+
+function initLog(){
+  document.getElementById('cat-chips').innerHTML=CATS.map(c=>`<span class="cat-chip" onclick="selCatFn('${c}',this)">${c}</span>`).join('');
+  document.getElementById('tx-date').value=new Date().toISOString().slice(0,10);
+  var sel=document.getElementById('bud-cat');sel.innerHTML='<option value="">Select…</option>'+CATS.map(c=>`<option value="${c}">${c}</option>`).join('');
+}
+
+function selCatFn(c,btn){selCat=c;document.querySelectorAll('#cat-chips .cat-chip').forEach(b=>b.classList.remove('sel'));btn.classList.add('sel');}
+
+function saveTx(){
+  var amt=parseFloat(document.getElementById('tx-amount').value);
+  var desc=document.getElementById('tx-desc').value.trim();
+  if(!amt||!desc){toast('Fill in amount and description');return;}
+  var txs=JSON.parse(localStorage.getItem('jb-txs')||'[]');
+  txs.unshift({type:txType,amount:amt,desc,cat:selCat,date:document.getElementById('tx-date').value,ts:Date.now()});
+  localStorage.setItem('jb-txs',JSON.stringify(txs.slice(0,500)));
+  document.getElementById('tx-amount').value='';document.getElementById('tx-desc').value='';
+  selCat='';document.querySelectorAll('#cat-chips .cat-chip').forEach(b=>b.classList.remove('sel'));
+  toast((txType==='income'?'+ ':'− ')+'$'+amt.toFixed(2)+' saved 💸');
+  renderOverview();
+}
+
+function getTxsThisMonth(){
+  var txs=JSON.parse(localStorage.getItem('jb-txs')||'[]');
+  var now=new Date();var ym=now.getFullYear()+'-'+(now.getMonth()+1).toString().padStart(2,'0');
+  return txs.filter(t=>t.date&&t.date.startsWith(ym));
+}
+
+function renderOverview(){
+  var txs=getTxsThisMonth();
+  var inc=txs.filter(t=>t.type==='income').reduce((a,t)=>a+t.amount,0);
+  var exp=txs.filter(t=>t.type==='expense').reduce((a,t)=>a+t.amount,0);
+  var net=inc-exp;
+  document.getElementById('net-num').textContent=(net>=0?'+':'')+'$'+Math.abs(net).toFixed(2);
+  document.getElementById('net-num').style.color=net>=0?'var(--t2)':'var(--r2)';
+  document.getElementById('inc-num').textContent='$'+inc.toFixed(2);
+  document.getElementById('exp-num').textContent='$'+exp.toFixed(2);
+  // Cat breakdown
+  var cats={};txs.filter(t=>t.type==='expense').forEach(t=>{var c=t.cat||'🎁 Other';cats[c]=(cats[c]||0)+t.amount;});
+  var el=document.getElementById('cat-breakdown');
+  if(!Object.keys(cats).length){el.innerHTML='<div style="text-align:center;color:var(--tx3);font-size:14px">No expenses this month.</div>';return;}
+  var maxV=Math.max(...Object.values(cats));
+  el.innerHTML=Object.entries(cats).sort((a,b)=>b[1]-a[1]).map(([c,v])=>
+    `<div style="margin-bottom:.5rem"><div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:3px"><span style="color:var(--tx2)">${c}</span><span style="font-weight:700;color:var(--tx)">$${v.toFixed(2)}</span></div><div class="prog-bar"><div class="prog-fill" style="width:${v/maxV*100}%"></div></div></div>`
+  ).join('');
+  // Recent
+  document.getElementById('recent-txs').innerHTML=txs.slice(0,8).map(t=>
+    `<div class="tx-row"><div class="tx-ico ${t.type}">${t.type==='income'?'💰':'💸'}</div><div style="flex:1"><div style="font-size:14px;font-weight:600;color:var(--tx)">${t.desc}</div><div style="font-size:11px;color:var(--tx3)">${t.cat||''} · ${t.date}</div></div><div style="font-size:15px;font-weight:700;color:${t.type==='income'?'var(--t2)':'var(--r2)'}">${t.type==='income'?'+':'−'}$${t.amount.toFixed(2)}</div></div>`
+  ).join('');
+}
+
+function saveBudget(){
+  var cat=document.getElementById('bud-cat').value;var amt=parseFloat(document.getElementById('bud-amt').value);
+  if(!cat||!amt){toast('Select a category and amount');return;}
+  var buds=JSON.parse(localStorage.getItem('jb-budgets')||'{}');buds[cat]=amt;
+  localStorage.setItem('jb-budgets',JSON.stringify(buds));
+  document.getElementById('bud-amt').value='';renderBudgets();toast('Budget set 🎯');
+}
+
+function renderBudgets(){
+  var buds=JSON.parse(localStorage.getItem('jb-budgets')||'{}');
+  var txs=getTxsThisMonth();
+  var el=document.getElementById('budget-list');
+  if(!Object.keys(buds).length){el.innerHTML='<div class="card" style="text-align:center;color:var(--tx3);font-size:14px">No budgets set yet.</div>';return;}
+  el.innerHTML=Object.entries(buds).map(([cat,lim])=>{
+    var spent=txs.filter(t=>t.cat===cat&&t.type==='expense').reduce((a,t)=>a+t.amount,0);
+    var pct=Math.min(spent/lim*100,100);var over=spent>lim;
+    return `<div class="card" style="margin-bottom:.5rem"><div style="display:flex;justify-content:space-between;margin-bottom:.4rem"><span style="font-size:14px;font-weight:600;color:var(--tx)">${cat}</span><span style="font-size:13px;color:${over?'var(--r2)':'var(--tx3)'}">$${spent.toFixed(0)} / $${lim.toFixed(0)}</span></div><div class="prog-bar"><div class="prog-fill${over?' over':''}" style="width:${pct}%"></div></div><div style="font-size:11px;color:${over?'var(--r2)':'var(--tx3)'};margin-top:3px">${over?'⚠️ Over budget by $'+(spent-lim).toFixed(2):Math.round(100-pct)+'% remaining'}</div></div>`;
+  }).join('');
+}
+
+function saveTuition(){
+  var data={total:parseFloat(document.getElementById('total-cost').value)||0,paid:parseFloat(document.getElementById('total-paid').value)||0,aid:parseFloat(document.getElementById('total-aid').value)||0};
+  localStorage.setItem('jb-tuition',JSON.stringify(data));loadTuition();toast('Tuition updated 🎓');
+}
+
+function loadTuition(){
+  var d=JSON.parse(localStorage.getItem('jb-tuition')||'{}');
+  if(d.total){document.getElementById('total-cost').value=d.total;document.getElementById('total-paid').value=d.paid||0;document.getElementById('total-aid').value=d.aid||0;}
+  var el=document.getElementById('tuition-summary');
+  if(!d.total){el.style.display='none';return;}
+  el.style.display='block';
+  var remaining=d.total-(d.paid||0)-(d.aid||0);var pct=((d.paid||0)+(d.aid||0))/d.total*100;
+  el.innerHTML=`<div style="font-size:11px;font-weight:700;color:var(--g2);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.75rem">Program overview · DAcHM 2026–2030</div>
+  <div style="display:flex;justify-content:space-between;margin-bottom:.35rem"><span style="font-size:14px;color:var(--tx2)">Total cost</span><span style="font-size:14px;font-weight:700;color:var(--tx)">$${d.total.toLocaleString()}</span></div>
+  <div style="display:flex;justify-content:space-between;margin-bottom:.35rem"><span style="font-size:14px;color:var(--t2)">Paid</span><span style="font-size:14px;font-weight:700;color:var(--t2)">$${(d.paid||0).toLocaleString()}</span></div>
+  <div style="display:flex;justify-content:space-between;margin-bottom:.65rem"><span style="font-size:14px;color:var(--v2)">Aid/Scholarships</span><span style="font-size:14px;font-weight:700;color:var(--v2)">$${(d.aid||0).toLocaleString()}</span></div>
+  <div class="prog-bar" style="height:12px"><div class="prog-fill" style="width:${Math.min(pct,100)}%"></div></div>
+  <div style="display:flex;justify-content:space-between;margin-top:.4rem"><span style="font-size:12px;color:var(--tx3)">${Math.round(pct)}% covered</span><span style="font-size:14px;font-weight:700;color:${remaining>0?'var(--r2)':'var(--t2)'}">$${Math.abs(remaining).toLocaleString()} ${remaining>0?'remaining':'overpaid'}</span></div>`;
+}
+
+const HEALTH_STACK=[
+  {n:'BodyBio PC',cost:85.99,qty:'90 caps',freq:'Monthly'},
+  {n:'TUDCA Plus',cost:84,qty:'60 caps',freq:'Monthly'},
+  {n:'ALAmax CR',cost:52,qty:'60 tabs',freq:'Monthly'},
+  {n:'Augmented NAC',cost:94,qty:'90 caps',freq:'Monthly'},
+  {n:'Tongkat Ali',cost:40,qty:'60 caps',freq:'Monthly'},
+  {n:'Vitamin D3+K2',cost:28,qty:'90 caps',freq:'Monthly'},
+  {n:'Er Zhi Wan',cost:18,qty:'200 caps',freq:'Monthly'},
+  {n:'Gou Qi Zi (tea)',cost:12,qty:'100g',freq:'Monthly'},
+  {n:'Ju Hua (tea)',cost:8,qty:'50g',freq:'Monthly'},
+  {n:'Pu-erh (tea)',cost:15,qty:'100g',freq:'Monthly'},
+];
+
+function renderHealth(){
+  var total=HEALTH_STACK.reduce((a,h)=>a+h.cost,0);
+  document.getElementById('health-total').textContent='$'+total.toFixed(2);
+  document.getElementById('health-annual').textContent='Annual: $'+(total*12).toFixed(0)+' · This is your health infrastructure.';
+  document.getElementById('health-items').innerHTML=HEALTH_STACK.map(h=>
+    `<div style="display:flex;justify-content:space-between;align-items:center;padding:.5rem 0;border-bottom:1px solid var(--bd2)"><div><div style="font-size:14px;font-weight:600;color:var(--tx)">${h.n}</div><div style="font-size:11px;color:var(--tx3)">${h.qty} · ${h.freq}</div></div><div style="font-size:14px;font-weight:700;color:var(--g2)">$${h.cost.toFixed(2)}</div></div>`
+  ).join('');
+}
+
+function renderAll(){
+  var txs=JSON.parse(localStorage.getItem('jb-txs')||'[]');
+  var el=document.getElementById('all-txs');
+  if(!txs.length){el.innerHTML='<div class="card" style="text-align:center;color:var(--tx3);font-size:14px">No transactions yet.</div>';return;}
+  el.innerHTML='<div class="card"><div>'+txs.map(t=>
+    `<div class="tx-row"><div class="tx-ico ${t.type}">${t.type==='income'?'💰':'💸'}</div><div style="flex:1"><div style="font-size:14px;font-weight:600;color:var(--tx)">${t.desc}</div><div style="font-size:11px;color:var(--tx3)">${t.cat||''} · ${t.date}</div></div><div style="font-size:15px;font-weight:700;color:${t.type==='income'?'var(--t2)':'var(--r2)'}">${t.type==='income'?'+':'−'}$${t.amount.toFixed(2)}</div></div>`
+  ).join('')+'</div></div>';
+}
+
+initLog();renderOverview();renderHealth();loadTuition();
+if('serviceWorker' in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('/jing-and-bling/sw.js').catch(e=>console.log(e)));
+</script>
+</body>
+</html>
