@@ -293,7 +293,7 @@ function renderAll(){
 }
 
 initLog();renderOverview();renderHealth();loadTuition();
-if('serviceWorker' in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('/sw.js', {scope: '/jing-and-bling/'}).catch(e=>console.log(e)));
+if('serviceWorker' in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('/jing-and-bling/sw.js').catch(e=>console.log(e)));
 </script>
 </body>
 </html>
